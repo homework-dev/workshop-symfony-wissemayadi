@@ -16,7 +16,8 @@ class Chauffeur
      * @ORM\Id
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private $numch;
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -28,9 +29,7 @@ class Chauffeur
      */
     private $prenom;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Voiture::class, mappedBy="voiture")
-     */
+
     private $voitures;
 
     public function __construct()
@@ -38,10 +37,22 @@ class Chauffeur
         $this->voitures = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    /**
+     * @return mixed
+     */
+    public function getNumch()
     {
-        return $this->id;
+        return $this->numch;
     }
+
+    /**
+     * @param mixed $numch
+     */
+    public function setNumch($numch): void
+    {
+        $this->numch = $numch;
+    }
+
 
     public function getNom(): ?string
     {
@@ -67,33 +78,17 @@ class Chauffeur
         return $this;
     }
 
-    /**
-     * @return Collection|Voiture[]
-     */
-    public function getVoitures(): Collection
+
+
+
+
+
+
+
+
+    public function __toString()
     {
-        return $this->voitures;
+        return (string)$this->getNumch();
     }
 
-    public function addVoiture(Voiture $voiture): self
-    {
-        if (!$this->voitures->contains($voiture)) {
-            $this->voitures[] = $voiture;
-            $voiture->setVoiture($this);
-        }
-
-        return $this;
-    }
-
-    public function removeVoiture(Voiture $voiture): self
-    {
-        if ($this->voitures->removeElement($voiture)) {
-            // set the owning side to null (unless already changed)
-            if ($voiture->getVoiture() === $this) {
-                $voiture->setVoiture(null);
-            }
-        }
-
-        return $this;
-    }
 }

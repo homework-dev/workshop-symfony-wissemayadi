@@ -33,7 +33,7 @@ class ChauffeurController extends AbstractController
      */
     public  function addChauffeur(\Symfony\Component\HttpFoundation\Request $request){
         $chauffeur=new Chauffeur();
-        $form=$this->createForm(ChauffeurType::class);
+        $form=$this->createForm(ChauffeurType::class,$chauffeur);
         $form->handleRequest($request);
         if($form->isSubmitted()){
             $em=$this->getDoctrine()->getManager();

@@ -15,12 +15,12 @@
     </tr>
     {% for ch in tabChauffeur %}
         <tr>
-            <td>{{ ch.id }}</td>
+            <td>{{ ch.numch }}</td>
             <td>{{ ch.nom }}</td>
             <td>{{ ch.prenom}}</td>
 
 
-            <td><a href="{{ path('updateChauffeur',{'id':ch.id}) }}">Update</a>
+            <td><a href="{{ path('updateChauffeur',{'id':ch.numch}) }}">Update</a>
                 <a href="#">show</a>
 
             </td>

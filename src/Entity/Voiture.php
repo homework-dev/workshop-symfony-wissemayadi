@@ -31,10 +31,8 @@ class Voiture
      */
     private $dateFin;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Chauffeur::class, inversedBy="voitures")
-     */
-    private $voiture;
+
+
 
     public function getId(): ?int
     {
@@ -85,17 +83,7 @@ class Voiture
         $this->dateFin = $dateFin;
     }
 
-    public function getVoiture(): ?Chauffeur
-    {
-        return $this->voiture;
-    }
 
-    public function setVoiture(?Chauffeur $voiture): self
-    {
-        $this->voiture = $voiture;
-
-        return $this;
-    }
 
 
 }
