@@ -31,6 +31,12 @@ class Voiture
      */
     private $dateFin;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Chauffeur::class, inversedBy="voitures")
+     * @ORM\JoinColumn(name="numch", referencedColumnName="numch")
+     */
+    private $Voiture;
+
 
 
 
@@ -81,6 +87,18 @@ class Voiture
     public function setDateFin($dateFin): void
     {
         $this->dateFin = $dateFin;
+    }
+
+    public function getVoiture(): ?Chauffeur
+    {
+        return $this->Voiture;
+    }
+
+    public function setVoiture(?Chauffeur $Voiture): self
+    {
+        $this->Voiture = $Voiture;
+
+        return $this;
     }
 
 

@@ -29,13 +29,18 @@ class Chauffeur
      */
     private $prenom;
 
-
+    /**
+     * @ORM\OneToMany(targetEntity=Voiture::class, mappedBy="Voiture")
+     */
     private $voitures;
 
     public function __construct()
     {
         $this->voitures = new ArrayCollection();
     }
+
+
+
 
     /**
      * @return mixed
@@ -89,6 +94,36 @@ class Chauffeur
     public function __toString()
     {
         return (string)$this->getNumch();
+    }
+
+    /**
+     * @return Collection|Voiture[]
+     */
+    public function getVoitures(): Collection
+    {
+        return $this->voitures;
+    }
+
+    public function addVoiture(Voiture $voiture): self
+    {
+        if (!$this->voitures->contains($voiture)) {
+            $this->voitures[] = $voiture;
+            $voiture->setVoiture($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVoiture(Voiture $voiture): self
+    {
+        if ($this->voitures->removeElement($voiture)) {
+            // set the owning side to null (unless already changed)
+            if ($voiture->getVoiture() === $this) {
+                $voiture->setVoiture(null);
+            }
+        }
+
+        return $this;
     }
 
 }
