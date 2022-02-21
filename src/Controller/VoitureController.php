@@ -21,12 +21,15 @@ class VoitureController extends AbstractController
     }
 
     /**
-     * @Route("/listvoiture", name="listvoiture")
+     * @Route("/listvoiture/{marque?}", name="listvoiture")
      */
-    public function listvoiture()
+    public function listvoiture($marque)
     {
+
         $voiture = $this->getDoctrine()->getRepository(Voiture::class)->findAll();
-        return $this->render("voiture/list.html.twig", array("tabVoiture" => $voiture
+        $count = $this->getDoctrine()->getRepository(Voiture::class)->searchVoiture($marque);
+
+        return $this->render("voiture/list.html.twig", array("tabVoiture" => $voiture,"count"=>$count, "marque"=>$marque
             )
         );
     }
@@ -45,15 +48,17 @@ class VoitureController extends AbstractController
     }
 
     /**
-     * @Route("/countVoiture/{marque}", name="countV")
+     * @Route("/countVoiture/{marque}", name="countVoiture")
      */
     public function countVoiture($marque)
     {
-        $voitures = $this->getDoctrine()->getRepository(Voiture::class)->findAll();
+        $voiture = $this->getDoctrine()->getRepository(Voiture::class)->findAll();
         $count = $this->getDoctrine()->getRepository(Voiture::class)->searchVoiture($marque);
-        return $this->render('voiture/list.html.twig', array('count' => $count, 'tabVoiture' => $voitures, 'marque' => $marque));
+        return $this->render('voiture/marque.html.twig', array('count' => $count, 'tabVoiture' => $voiture,'marque' => $marque));
+
 
 
 
     }
+
 }
