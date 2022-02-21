@@ -47,4 +47,15 @@ class VoitureRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function searchVoiture($marque)
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.marque LIKE :x')
+            ->setParameter('x', '%'.$marque.'%')
+            ->select('count(s.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+
+    }
 }

@@ -24,7 +24,8 @@
 
             </td>
             <td><a href="{{ path('addchauffeur')}}">Louer</a></td>
-            <td><a href="#">Nombres de voitures</a></td>
+            <td><a href="{{path('countV',{'marque':s.marque})  }}">Nombres de voitures</a></td>
         </tr>
     {% endfor %}
 </table><br>
+<h4>le nombre de voiture de la marque  <span>{{ marque }} est {{ count }}</span></h4>
